@@ -1,0 +1,63 @@
+multiple spheres source routine
+
+jaszakファントムについて
+*.inpについて
+
+このファイルにはファントムのサイズと位置、MBq/cc、形状を記す。
+
+
+
+
+/////////////////////////////////////////////////////
+
+energy resolution
+ index98 - 1
+ FWHM = a + b√(Ene + cEne^2)
+ 設定方法 simind.iniの46,47,48でa,b,cを設定可能
+symbiaのエネルギー分解能は
+ FWHM = -0.534 + 0.946√(E+0.006E^2)
+ 
+  *.erfファイルで設定
+  index22 = 0 あるいは switch /FE:filename
+
+  
+ ////////////////////////////////////////////
+ penetrate scoring routine
+
+  index84 = 4
+
+*.b01 = all type of interactions.
+検出された光子すべて
+*.b02 = Geometrical collimated primary attenuated photons from the phantom.
+ファントムから直接放出された光子で、コリメーションされた光子
+*.b03 = Penetration of a septa from primary attenuated photons from the phantom.
+ファントムから直接放出され、コリメータの隔壁を貫通した光子
+*.b04 = Scatter from the collimator from primary attenuated photons from the phantom.
+ファントムから直接放出され、コリメータで散乱した光子
+*.b05 = X-rays from the collimator from primary attenuated photons from the phantom.
+ファントムから直接放出された光子がコリメータでX線を放出したもの
+*.b06 = Geometrical collimated from scattered photons from the phantom.
+ファントムから放出された散乱線で、コリメーションされた光子
+*.b07 = Penetration of a septa from scattered photons from the phantom.
+ファントムから放出された散乱線で、コリメータの隔壁を貫通した光子
+*.b08 = Scatter from the collimator from scattered photons from the phantom.
+ファントムから放出された散乱線が、コリメータで散乱した光子
+*.b09 = X-rays from the collimator from scattered photons from the phantom.
+ファントムから放出された散乱線がコリメータでX線を放出したもの
+
+//////////////////////////////////////////////
+energy resolutionを測定する場合
+
+論文：Modelling of energy-dependent spectral resolution for SPECT Monte Carlo simulations using simind
+
+線源と検出器の距離：30㎝
+
+////////////////////////////////////////////
+LEHRコリメータを使用した場合の定量性の評価
+
+これからやること
+1.ROIの位置が線源の位置と一致していることを確かめる
+やり方はリストモードを使用してアイソトープのある場所を特定する
+
+
+

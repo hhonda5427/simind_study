@@ -1,0 +1,63 @@
+!INTERFILE :=
+!imaging modality := nucmed
+;# imaging modality 2 := NM
+!originating system := simind
+!version of keys := 3.3
+program author := M Ljungberg, Lund University
+program version := V7.0.3
+  
+!GENERAL DATA :=
+original institution := Medical Radiation Physics
+contact person := M Ljungberg
+!data offset in bytes := 0
+!name of data file := me_calib.a00
+patient name := SMC_me_calib.a00
+!study ID := symbia
+data description :=
+;# Radionuclide := i123
+exam type := STATIC
+!patient ID := SIMIND
+  
+!GENERAL IMAGE DATA :=
+patient orientation := head_in
+patient rotation := supine
+!type of data := static
+study date := 2024:02:06
+study time := 10:03:43
+imagedata byte order := LITTLEENDIAN
+patient rotation := supine
+patient orientation := head_in
+;energy window lower level := 147.07
+;energy window upper level := 170.93
+!total number of images := 1
+!number of energy windows := 1
+;# Image Position First image := -281.6000 -281.6000 281.600000
+;# Image Orientation := 1.000 0.000 0.000 0.000 0.000 -1.000
+;# Units of data (ECT) := counts
+  
+!STATIC STUDY (General) :=
+!number of images/energy window := 1
+image duration (sec) := 1.000
+!static study (each frame) :=
+!image number := 1
+!matrix size [1] := 256
+!matrix size [2] := 256
+!number format := short float
+!number of bytes per pixel := 4
+label := View1
+scaling factor (mm/pixel) [1] := 2.200
+scaling factor (mm/pixel) [2] := 2.200
+;# scaling factor (mm/pixel) [3] := 2.200
+maximum pixel count := 2.354
+;# total counts := 123.366
+  
+;# SIMIND-SPECIFIC PARAMETERS :=
+;# Intrinsic FWHM for the camera := 0.380
+;# Collimator := sy-me
+;# Collimator hole diameter := 0.294
+;# Collimator hole septa := 0.114
+;# Collimator thickness := 4.064
+;# SIMIND: Photon Energy := 159.000
+;# SIMIND: Time shift := -9999.000
+  
+!END OF INTERFILE :=
