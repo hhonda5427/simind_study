@@ -1,8 +1,65 @@
 ## 123Iによるdosimetryにおいてコリメータの違いが定量性に与える影響
 
-LEHRとMEコリメータで比較
-空間分解能 LEHR > ME
+LEHRとMEコリメータで比較  
+空間分解能 LEHR > ME  
 penetration LEHR < ME
+___  
+シミュレーションで作成したデータ  
+- LEHR  
+    - main  
+    - upper  
+    - lower  
+    - calib  
+- ME  
+    - main  
+    - upper  
+    - lower  
+    - calib  
+
+各エネルギーウィンドウに対してpenetration routineを使用しtotal, primary, penetration, scatterなどのデータを取得  
+
+*.b01 = all type of interactions.   
+ ->　検出された光子すべて  
+*.b02 = Geometrical collimated primary attenuated photons from the phantom.  
+   -> ファントムから直接放出された光子で、コリメーションされた光子  
+*.b03 = Penetration of a septa from primary attenuated photons from the phantom.  
+ -> ファントムから直接放出され、コリメータの隔壁を貫通した光子  
+*.b04 = Scatter from the collimator from primary attenuated photons from the phantom.  
+ -> ファントムから直接放出され、コリメータで散乱した光子  
+*.b05 = X-rays from the collimator from primary attenuated photons from the phantom.  
+-> ファントムから直接放出された光子がコリメータでX線を放出したもの  
+*.b06 = Geometrical collimated from scattered photons from the phantom.  
+-> ファントムから放出された散乱線で、コリメーションされた光子  
+*.b07 = Penetration of a septa from scattered photons from the phantom.  
+-> ファントムから放出された散乱線で、コリメータの隔壁を貫通した光子  
+*.b08 = Scatter from the collimator from scattered photons from the phantom.  
+-> ファントムから放出された散乱線が、コリメータで散乱した光子  
+*.b09 = X-rays from the collimator from scattered photons from the phantom.  
+-> ファントムから放出された散乱線がコリメータでX線を放出したもの  
+
+結晶の後ろからの後方散乱がある場合の光子の挙動
+
+*.b10 = Geometrical collimated primary attenuated photons from the phantom.  
+   -> ファントムから直接放出された光子で、コリメーションされた光子  
+*.b11 = Penetration of a septa from primary attenuated photons from the phantom.  
+ -> ファントムから直接放出され、コリメータの隔壁を貫通した光子  
+*.b12 = Scatter from the collimator from primary attenuated photons from the phantom.  
+ -> ファントムから直接放出され、コリメータで散乱した光子  
+*.b13 = X-rays from the collimator from primary attenuated photons from the phantom.  
+-> ファントムから直接放出された光子がコリメータでX線を放出したもの  
+*.b14 = Geometrical collimated from scattered photons from the phantom.  
+-> ファントムから放出された散乱線で、コリメーションされた光子  
+*.b15 = Penetration of a septa from scattered photons from the phantom.  
+-> ファントムから放出された散乱線で、コリメータの隔壁を貫通した光子  
+*.b16 = Scatter from the collimator from scattered photons from the phantom.  
+-> ファントムから放出された散乱線が、コリメータで散乱した光子  
+*.b17 = X-rays from the collimator from scattered photons from the phantom.  
+-> ファントムから放出された散乱線がコリメータでX線を放出したもの  
+
+*.b18 = photons without scattering and attenuation in the phantom  
+-> ファントム内における散乱や減弱のない光子  
+*.b19 = photons without scattering and attenuation in the phantom and geometrically collimated for primary photon energy  
+-> ファントム内で散乱や減弱をしていない光子で、幾何学的にコリメーションされた光子  
 
 jaszakファントムを使用して比較
 
