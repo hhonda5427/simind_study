@@ -88,7 +88,7 @@ class SimindStudy:
             object_meta=data['object_meta'],
             proj_meta=data['proj_meta']
         )
-        likelihood = PoissonLogLikelihood(system_matrix, proj)
+        likelihood = PoissonLogLikelihood(system_matrix, proj, scatter)
 
         osem = OSEM(likelihood)
 
