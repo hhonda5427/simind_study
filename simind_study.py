@@ -114,9 +114,19 @@ b1_proj = b1['projections']
 b1_att_map = b1['attenuation_map']
 b1_proj_noise = torch.poisson(b1_proj * activity * dT)
 b1_ax = lehr_main.osem_psf(6, 4, b1_proj_noise, b1, None)
+
+CPS_per_MBq = 160.3027
+calibration_factor = 1 / CPS_per_MBq / dT / np.prod(b1['object_meta'].dr)
+
 b1_ax = b1_ax[0].cpu().numpy()
+source_prediction_MBqpml = b1_ax * calibration_factor
+
 plt.pcolormesh(b1_att_map[0,:,:,128].cpu().T, cmap='Greys_r')
-plt.pcolormesh(b1_ax[:,:,128].T, cmap=custom_cmap, alpha=0.8)
-plt.colorbar(label='Counts')
+plt.pcolormesh(source_prediction_MBqpml[:,:,128].T, cmap=custom_cmap, alpha=0.8)
+plt.colorbar(label='MBq/mL')
 plt.axis('off')
 plt.show()
+
+print(activity)
+print('_____')
+print(source_prediction_MBqpml.sum() * np.prod(b1['object_meta'].dr))
