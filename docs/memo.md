@@ -39,6 +39,10 @@ ___
     - lower  
     - calib  
 
+
+
+
+
 各エネルギーウィンドウに対してpenetration routineを使用しtotal, primary, penetration, scatterなどのデータを取得  
 画像またはスペクトルのコンポーネントを分離する "penetrate" スコアリングルーチンに関して。    
 18 種類の異なる画像とエネルギースペクトルが保存されています。  

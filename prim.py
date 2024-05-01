@@ -20,9 +20,9 @@ custom_cmap = LinearSegmentedColormap.from_list('custom_colormap', colors)
 primary_dir = r'C:\Users\hhond\source\repos\simind_study\lehr_main_t\lehr_main_t.b02'
 photopeak_hdr = r'C:\Users\hhond\source\repos\simind_study\lehr_main_t\lehr_main_t.h00'
 att_dir = r'C:\Users\hhond\source\repos\simind_study\lehr_main_t\lehr_main_t.hct'
-CPS_per_MBq = 71.2258
+CPS_per_MBq = 70.8321 #71.2258
 dT = 20
-activity = 1
+activity = 10
 
 #.h00ファイルのname of data fileを変換する
 sim.change_header_file_data(photopeak_hdr, primary_dir)

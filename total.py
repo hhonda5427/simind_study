@@ -22,7 +22,7 @@ photopeak_hdr = r'C:\Users\hhond\source\repos\simind_study\lehr_main_t\lehr_main
 att_dir = r'C:\Users\hhond\source\repos\simind_study\lehr_main_t\lehr_main_t.hct'
 inp_dir = r'C:\Users\hhond\source\repos\simind_study\symbia_lehr_main.inp'
 
-CPS_per_MBq = 179.3428
+CPS_per_MBq = 191.14 #179.3428
 dT = 20
 activity = 10
 

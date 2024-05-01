@@ -26,9 +26,9 @@ def create_roi_map(sphere_data_path, output_file_path, width, height, depth, vox
     volume_center_y = height * voxel_size / 2
     volume_center_z = depth * voxel_size / 2
     # Iterate over the spheres data
-    flg = 1
+    flg = 0
     for sphere in spheres_data:
-        # flg += 1
+        flg += 1
         radius_z, radius_x, radius_y, center_z, center_x, center_y, _, _ = sphere
         
         target_center_x = volume_center_x + center_x
@@ -50,7 +50,7 @@ def create_roi_map(sphere_data_path, output_file_path, width, height, depth, vox
     with open(output_file_path, 'wb') as f:
         f.write(array_3d.astype(np.float32).tobytes())
 
-    return array_3d
+    return array_3d, flg
 
 # roi_map = create_roi_map("symbia.inp", 'inp.bin', 128, 128, 128, 4.4)
 # import matplotlib.pyplot as plt

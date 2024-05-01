@@ -98,6 +98,13 @@ class SimindStudy:
     def proj(self):
         return self._proj
     
+
+    def triple_energy_window(self):
+
+        s_TEW = simind.get_scatter_from_TEW()
+
+        pass
+
 main_dir = 'C:\\Users\\hhond\\source\\repos\\simind_study\\lehr_main'
 upper_dir = 'C:\\Users\\hhond\\source\\repos\\simind_study\\lehr_up'
 lower_dir = 'C:\\Users\\hhond\\source\\repos\\simind_study\\lehr_low'
