@@ -1,0 +1,77 @@
+!INTERFILE :=
+!imaging modality := nucmed
+;# imaging modality 2 := EMS
+!originating system := simind
+!version of keys := 3.3
+program author := M Ljungberg, Lund University
+program version := V7.0.3
+  
+!GENERAL DATA :=
+original institution := Medical Radiation Physics
+contact person := M Ljungberg
+!data offset in bytes := 0
+!name of data file := C:\simind\mew15_5\projections\mew15_5_low.b01
+patient name := SMC_mew15_5_low.a00
+!study ID := symbia
+data description :=
+;# Radionuclide := i123
+exam type := EMISSION
+!patient ID := SIMIND
+  
+!GENERAL IMAGE DATA :=
+patient orientation := head_in
+patient rotation := supine
+!type of data := tomographic
+study date := 2024:04:26
+study time := 05:31:25
+imagedata byte order := LITTLEENDIAN
+patient rotation := supine
+patient orientation := head_in
+;energy window lower level := 139.12
+;energy window upper level := 147.07
+!total number of images := 72
+!number of energy windows := 1
+;# Image Position First image := -210.9248 -210.9248 210.924800
+;# Image Orientation := 1.000 0.000 0.000 0.000 0.000 -1.000
+;# Units of data (ECT) := counts
+  
+!SPECT STUDY (General) :=
+number of detector heads := 1
+!matrix size [1] := 128
+!matrix size [2] := 128
+!number format := short float
+!number of bytes per pixel := 4
+scaling factor (mm/pixel) [1] := 3.296
+scaling factor (mm/pixel) [2] := 3.296
+;# scaling factor (mm/pixel) [3] := 3.296
+!extent of rotation := 360
+!process status := acquired
+!number of projections := 72
+!number of images/energy window := 72
+!time per projection (sec) := 1.000
+image duration (sec) := 72.000
+maximum pixel count := 0.023
+;# total counts := 1263.317
+;# Center of Rotation := 65.000
+  
+!SPECT STUDY (acquired data) :=
+orbit := circular
+;#Radius := 15.000
+acquisition mode := stepped
+!direction of rotation := CCW
+start angle := 0.000
+;#X_offset := 0.000
+  
+;# Name of Aligned Density Map := mew15_5_low.hct
+;# Name of Aligned transmission study := mew15_5_low.hct
+  
+;# SIMIND-SPECIFIC PARAMETERS :=
+;# Intrinsic FWHM for the camera := 0.380
+;# Collimator := sy-lehr
+;# Collimator hole diameter := 0.111
+;# Collimator hole septa := 0.016
+;# Collimator thickness := 2.405
+;# SIMIND: Photon Energy := 159.000
+;# SIMIND: Time shift := -9999.000
+  
+!END OF INTERFILE :=
