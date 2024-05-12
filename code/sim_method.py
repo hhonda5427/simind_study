@@ -1,6 +1,7 @@
 import os
 import re
 import numpy as np
+from pytomography.io.SPECT import simind
 
 # headerファイルの'imagefile' : 'name of data file'を任意のファイル名に書き換える
 def change_header_file_data(header_path: str, target_file_path: str):
@@ -56,3 +57,69 @@ def create_roi_map(sphere_data_path, output_file_path, width, height, depth, vox
 # import matplotlib.pyplot as plt
 # plt.pcolormesh(roi_map[:,:,64].T, cmap='Greys_r', vmax=7)
 # plt.colorbar(label='Counts')
+
+def get_septa_penetrate_projections(photopeak:str, lower:str, upper:str):
+
+    # Extract the file extension from photopeak_dir
+    file_extension = os.path.splitext(photopeak)[1]
+    # Change the file extension to '.b03'
+    photopeak_dir = photopeak.replace(file_extension, '.b03')
+    photopeak_hdr = photopeak.replace(file_extension, '.h00')
+    lower_dir= lower.replace(file_extension, '.b03')
+    lower_hdr = lower.replace(file_extension, '.h00')
+    upper_dir= upper.replace(file_extension, '.b03')
+    upper_hdr = upper.replace(file_extension, '.h00')    
+
+    change_header_file_data(photopeak_hdr, photopeak_dir)
+    change_header_file_data(lower_hdr, lower_dir)
+    change_header_file_data(upper_hdr, upper_dir)    
+
+    penetrate_projections = simind.get_projections(photopeak_hdr) 
+
+    penetrate_TEW = simind.get_scatter_from_TEW(
+        headerfile_lower=lower_hdr,
+        headerfile_peak=photopeak_hdr,
+        headerfile_upper=upper_hdr
+    )
+    projections = penetrate_projections - penetrate_TEW
+    projections[projections < 0] = 0
+    return projections
+
+def get_septa_scatter_projections(photopeak:str, lower:str, upper:str):
+
+    # Extract the file extension from photopeak_dir
+    file_extension = os.path.splitext(photopeak)[1]
+    # Change the file extension to '.b03'
+    photopeak_dir = photopeak.replace(file_extension, '.b04')
+    photopeak_hdr = photopeak.replace(file_extension, '.h00')
+    lower_dir= lower.replace(file_extension, '.b04')
+    lower_hdr = lower.replace(file_extension, '.h00')
+    upper_dir= upper.replace(file_extension, '.b04')
+    upper_hdr = upper.replace(file_extension, '.h00')    
+
+    change_header_file_data(photopeak_hdr, photopeak_dir)
+    change_header_file_data(lower_hdr, lower_dir)
+    change_header_file_data(upper_hdr, upper_dir)    
+
+    scatter_projections = simind.get_projections(photopeak_hdr) 
+
+    scatter_TEW = simind.get_scatter_from_TEW(
+        headerfile_lower=lower_hdr,
+        headerfile_peak=photopeak_hdr,
+        headerfile_upper=upper_hdr
+    )
+    projections = scatter_projections - scatter_TEW
+    projections[projections < 0] = 0
+    return projections
+
+def get_primary_projections(photopeak:str):
+
+    # Extract the file extension from photopeak_dir
+    file_extension = os.path.splitext(photopeak)[1]
+    # Change the file extension to '.b03'
+    photopeak_dir = photopeak.replace(file_extension, '.b02')
+    photopeak_hdr = photopeak.replace(file_extension, '.h00')
+
+    change_header_file_data(photopeak_hdr, photopeak_dir)
+    
+    return simind.get_projections(photopeak_hdr)
