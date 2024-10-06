@@ -108,6 +108,10 @@ s_TEW = simind.get_scatter_from_TEW(
     headerfile_upper=upper_hdr
 )
 
+# s_TEWをbinarydataとして出力
+with open('s_TEW_output_15_5.bin', 'wb') as f:
+    f.write(s_TEW.cpu().numpy().tobytes())
+
 projections_noise = torch.poisson(projections * activity * dT)
 s_TEW = torch.poisson(s_TEW * activity * dT)
 
@@ -134,14 +138,16 @@ osem = OSEM(likelihood)
 #             system_matrix=system_matrix,
 #             scatter=s_TEW)
 
-calibration_factor = osem(n_iters=10, n_subsets=8)
+calibration_factor = osem(n_iters=10, n_subsets=4)
 
 calibration_factor = calibration_factor[0].cpu().numpy()
+with open('calib_factor_output_15_5.bin', 'wb') as f:
+    f.write(calibration_factor.tobytes())
 calibration_factor[calibration_factor < 0] = 0
 pixel_size = object_meta.dx
 
 center_x, center_y, center_z = calibration_factor.shape[0] // 2, calibration_factor.shape[1] // 2, calibration_factor.shape[2] // 2
-radius = 3 / pixel_size
+radius = 6 / pixel_size
 
 
 total_sum_within_radius = np.sum(calibration_factor[
@@ -149,6 +155,7 @@ total_sum_within_radius = np.sum(calibration_factor[
     max(center_y - int(radius), 0): min(center_y + int(radius) + 1, calibration_factor.shape[1]),
     max(center_z - int(radius), 0): min(center_z + int(radius) + 1, calibration_factor.shape[2])])
 print(f"{calibration_factor.sum().item() / activity / dT},{total_sum_within_radius / activity / dT}")
+
 
 
 # print(object_meta.dr)

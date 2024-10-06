@@ -24,17 +24,20 @@ custom_cmap = LinearSegmentedColormap.from_list('custom_colormap', colors)
 # lower_hdr = r"C:\simind\mew20_3\l_low.h00"
 # upper_dir = r"C:\simind\mew20_3\l_up.b01"
 # upper_hdr = r"C:\simind\mew20_3\l_up.h00"
-# CPS_per_MBq = 79.5400#static 79.5400  #spect 79.0175  #true 70.756
+# CPS_per_MBq = 79.5400  # radius = 3cm #static 79.5400  #spect 79.0175  #true 70.756
+# CPS_per_MBq = 84.85     #radius = 6cm
 
 """mew10_10"""
-photopeak_dir = r"C:\simind\mew20_10\projections\mew20_10__main.b01"
-photopeak_hdr = r"C:\simind\mew20_10\projections\mew20_10__main.h00"
-att_dir = r"C:\simind\mew20_10\projections\mew20_10__main.hct"
-lower_dir = r"C:\simind\mew20_10\projections\mew20_10__low.b01"
-lower_hdr = r"C:\simind\mew20_10\projections\mew20_10__low.h00"
-upper_dir = r"C:\simind\mew20_10\projections\mew20_10__up.b01"
-upper_hdr = r"C:\simind\mew20_10\projections\mew20_10__up.h00"
-CPS_per_MBq = 82.1604 #static 83.05  #spect 82.1604  #true 70.756
+# photopeak_dir = r"C:\simind\mew20_10\projections\mew20_10__main.b01"
+# photopeak_hdr = r"C:\simind\mew20_10\projections\mew20_10__main.h00"
+# att_dir = r"C:\simind\mew20_10\projections\mew20_10__main.hct"
+# lower_dir = r"C:\simind\mew20_10\projections\mew20_10__low.b01"
+# lower_hdr = r"C:\simind\mew20_10\projections\mew20_10__low.h00"
+# upper_dir = r"C:\simind\mew20_10\projections\mew20_10__up.b01"
+# upper_hdr = r"C:\simind\mew20_10\projections\mew20_10__up.h00"
+# CPS_per_MBq = 82.1604 #radius=3cm  #static 83.05  #spect 82.1604  
+# CPS_per_MBq = 87.34   #radius=6cm  
+#true 70.756
 
 """MEW15"""
 # photopeak_dir = r"C:\simind\mew15\projections\phantom\mew15_main.b01"
@@ -44,18 +47,18 @@ CPS_per_MBq = 82.1604 #static 83.05  #spect 82.1604  #true 70.756
 # lower_hdr = r"C:\simind\mew15\projections\phantom\mew15_low.h00"
 # upper_dir = r"C:\simind\mew15\projections\phantom\mew15_up.b01"
 # upper_hdr = r"C:\simind\mew15\projections\phantom\mew15_up.h00"
-# CPS_per_MBq = 75.4840    #static 68.52  #spect 75.4840
-
+# CPS_per_MBq = 75.4840    #radius = 3cm #static 68.52  #spect 75.4840
+# CPS_per_MBq = 80.38     #radius = 6cm
 """MEW15%_5%"""
-# photopeak_dir = r"C:\simind\mew15_5\projections\mew15_5_main.b01"
-# photopeak_hdr = r"C:\simind\mew15_5\projections\mew15_5_main.h00"
-# att_dir = r"C:\simind\mew15_5\projections\mew15_5_main.hct"
-# lower_dir = r"C:\simind\mew15_5\projections\mew15_5_low.b01"
-# lower_hdr = r"C:\simind\mew15_5\projections\mew15_5_low.h00"
-# upper_dir = r"C:\simind\mew15_5\projections\mew15_5_up.b01"
-# upper_hdr = r"C:\simind\mew15_5\projections\mew15_5_up.h00"
-# CPS_per_MBq = 68.8203    #static 68.52  #spect 68.8203
-
+photopeak_dir = r"C:\simind\mew15_5\projections\mew15_5_main.b01"
+photopeak_hdr = r"C:\simind\mew15_5\projections\mew15_5_main.h00"
+att_dir = r"C:\simind\mew15_5\projections\mew15_5_main.hct"
+lower_dir = r"C:\simind\mew15_5\projections\mew15_5_low.b01"
+lower_hdr = r"C:\simind\mew15_5\projections\mew15_5_low.h00"
+upper_dir = r"C:\simind\mew15_5\projections\mew15_5_up.b01"
+upper_hdr = r"C:\simind\mew15_5\projections\mew15_5_up.h00"
+# CPS_per_MBq = 68.8203    #radius = 3cm  #static 68.52  #spect 68.8203
+CPS_per_MBq = 73.29     #radius = 6cm
 """MEW21_7"""
 # photopeak_dir = r"C:\simind\mew21_7\mew21_main.b01"
 # photopeak_hdr = r"C:\simind\mew21_7\mew21_main.h00"
