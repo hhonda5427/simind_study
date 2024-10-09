@@ -138,12 +138,11 @@ osem = OSEM(likelihood)
 #             system_matrix=system_matrix,
 #             scatter=s_TEW)
 
-calibration_factor = osem(n_iters=10, n_subsets=4)
+calibration_factor = osem(n_iters=10, n_subsets=8)
 
 calibration_factor = calibration_factor[0].cpu().numpy()
-with open('calib_factor_output_15_5.bin', 'wb') as f:
-    f.write(calibration_factor.tobytes())
-calibration_factor[calibration_factor < 0] = 0
+
+# calibration_factor[calibration_factor < 0] = 0
 pixel_size = object_meta.dx
 
 center_x, center_y, center_z = calibration_factor.shape[0] // 2, calibration_factor.shape[1] // 2, calibration_factor.shape[2] // 2
@@ -156,8 +155,12 @@ total_sum_within_radius = np.sum(calibration_factor[
     max(center_z - int(radius), 0): min(center_z + int(radius) + 1, calibration_factor.shape[2])])
 print(f"{calibration_factor.sum().item() / activity / dT},{total_sum_within_radius / activity / dT}")
 
-
-
+# calibration_factor_gaussian = gaussian_filter(calibration_factor/activity/dT, sigma=(0.9, 0.9, 0.9))
+# with open('calib_factor_output_gauss_15_5.bin', 'wb') as f:
+#     f.write(calibration_factor_gaussian.tobytes())
+calibration_factor = calibration_factor/activity/dT
+with open('calib_factor_output_15_5.bin', 'wb') as f:
+    f.write(calibration_factor.tobytes())
 # print(object_meta.dr)
 
 # # ボクセルサイズを取得
