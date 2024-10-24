@@ -146,7 +146,7 @@ source_prediction_MBqpmL = source_prediction * calibration_factor
 # 3D Gaussian filter with FWHM=8mm to source_prediction_MBpmL
 # σ = (FWHM / pixel size) / ( 2 √(2 ln(2)))
 
-source_prediction_MBqpmL_gaussian = gaussian_filter(source_prediction_MBqpmL, sigma=(1.885, 1.885, 1.885))
+source_prediction_MBqpmL_gaussian = gaussian_filter(source_prediction_MBqpmL, sigma=(1.0, 1.0, 1.0))
 
 
 source_prediction_MBqpmL_within_roimap = source_prediction_MBqpmL * roi_map
@@ -154,7 +154,8 @@ source_prediction_MBqpmL_within_roimap = source_prediction_MBqpmL * roi_map
 print(f'{activity}___{source_prediction_MBqpmL.sum() * dr}____{source_prediction_MBqpmL_within_roimap.sum()*dr}')
 
 
-
+with open('source_prediction.bin','wb') as f:
+    f.write(source_prediction_MBqpmL_gaussian.transpose((2, 1, 0)).tobytes())
 
 
 

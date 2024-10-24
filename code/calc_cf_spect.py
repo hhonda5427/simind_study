@@ -34,12 +34,12 @@ import sim_method as sim
 # upper_hdr = r"C:\simind\mew20_3\calib\spect_calib\l_up_cali_sp.h00"
 
 """mew10_10"""
-photopeak_dir = r"C:\simind\mew20_10\cali\spect\mew20_10__main_cali_sp.b01"
-photopeak_hdr = r"C:\simind\mew20_10\cali\spect\mew20_10__main_cali_sp.h00"
-lower_dir = r"C:\simind\mew20_10\cali\spect\mew20_10__low_cali_sp.b01"
-lower_hdr = r"C:\simind\mew20_10\cali\spect\mew20_10__low_cali_sp.h00"
-upper_dir = r"C:\simind\mew20_10\cali\spect\mew20_10__up_cali_sp.b01"
-upper_hdr = r"C:\simind\mew20_10\cali\spect\mew20_10__up_cali_sp.h00"
+# photopeak_dir = r"C:\simind\mew20_10\cali\spect\mew20_10__main_cali_sp.b01"
+# photopeak_hdr = r"C:\simind\mew20_10\cali\spect\mew20_10__main_cali_sp.h00"
+# lower_dir = r"C:\simind\mew20_10\cali\spect\mew20_10__low_cali_sp.b01"
+# lower_hdr = r"C:\simind\mew20_10\cali\spect\mew20_10__low_cali_sp.h00"
+# upper_dir = r"C:\simind\mew20_10\cali\spect\mew20_10__up_cali_sp.b01"
+# upper_hdr = r"C:\simind\mew20_10\cali\spect\mew20_10__up_cali_sp.h00"
 
 # photopeak_dir = r"C:\simind\mew20_10\cali\spect\mew20_10__main_cali_sp.b02"
 # photopeak_hdr = r"C:\simind\mew20_10\cali\spect\mew20_10__main_cali_sp.h00"
@@ -72,12 +72,12 @@ upper_hdr = r"C:\simind\mew20_10\cali\spect\mew20_10__up_cali_sp.h00"
 # upper_dir = r"C:\simind\mew15_5\calib\spect\mew15_5_up_cali_sp.b01"
 # upper_hdr = r"C:\simind\mew15_5\calib\spect\mew15_5_up_cali_sp.h00"
 
-# photopeak_dir = r"C:\simind\mew15_5\calib\spect\mew15_5_main_cali_sp.b02"
-# photopeak_hdr = r"C:\simind\mew15_5\calib\spect\mew15_5_main_cali_sp.h00"
-# lower_dir = r"C:\simind\mew15_5\calib\spect\mew15_5_low_cali_sp.b02"
-# lower_hdr = r"C:\simind\mew15_5\calib\spect\mew15_5_low_cali_sp.h00"
-# upper_dir = r"C:\simind\mew15_5\calib\spect\mew15_5_up_cali_sp.b02"
-# upper_hdr = r"C:\simind\mew15_5\calib\spect\mew15_5_up_cali_sp.h00"
+photopeak_dir = r"C:\simind\mew15_5\calib\spect\mew15_5_main_cali_sp.b02"
+photopeak_hdr = r"C:\simind\mew15_5\calib\spect\mew15_5_main_cali_sp.h00"
+lower_dir = r"C:\simind\mew15_5\calib\spect\mew15_5_low_cali_sp.b02"
+lower_hdr = r"C:\simind\mew15_5\calib\spect\mew15_5_low_cali_sp.h00"
+upper_dir = r"C:\simind\mew15_5\calib\spect\mew15_5_up_cali_sp.b02"
+upper_hdr = r"C:\simind\mew15_5\calib\spect\mew15_5_up_cali_sp.h00"
 
 
 """MEW10.5_7"""
@@ -142,7 +142,7 @@ calibration_factor = osem(n_iters=10, n_subsets=8)
 
 calibration_factor = calibration_factor[0].cpu().numpy()
 
-# calibration_factor[calibration_factor < 0] = 0
+calibration_factor[calibration_factor < 0] = 0
 pixel_size = object_meta.dx
 
 center_x, center_y, center_z = calibration_factor.shape[0] // 2, calibration_factor.shape[1] // 2, calibration_factor.shape[2] // 2
@@ -159,8 +159,9 @@ print(f"{calibration_factor.sum().item() / activity / dT},{total_sum_within_radi
 # with open('calib_factor_output_gauss_15_5.bin', 'wb') as f:
 #     f.write(calibration_factor_gaussian.tobytes())
 calibration_factor = calibration_factor/activity/dT
-with open('calib_factor_output_15_5.bin', 'wb') as f:
-    f.write(calibration_factor.tobytes())
+reshaped_calib = calibration_factor.transpose((2, 1, 0))
+with open('calib_factor_output_15_5_prim.bin', 'wb') as f:
+    f.write(reshaped_calib.tobytes())
 # print(object_meta.dr)
 
 # # ボクセルサイズを取得
