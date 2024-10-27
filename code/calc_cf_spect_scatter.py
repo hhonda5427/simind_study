@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 import torch
 from pytomography.io.SPECT import simind
-from pytomography.utils import compute_EW_scatter
+# from pytomography.utils import compute_EW_scatter
 from pytomography.transforms.SPECT.attenuation import SPECTAttenuationTransform
 from pytomography.transforms.SPECT.psf import SPECTPSFTransform
 from pytomography.projectors.SPECT import SPECTSystemMatrix
@@ -20,34 +20,13 @@ import sim_method as sim
 
 
 """mew15_15"""
-# photopeak_dir = r"C:\simind\mew15\projections\cali_sp\mew15_main_cali_sp.b02"
-# photopeak_hdr = r"C:\simind\mew15\projections\cali_sp\mew15_main_cali_sp.h00"
-# lower_dir = r"C:\simind\mew15\projections\cali_sp\mew15_low_cali_sp.b01"
-# lower_hdr = r"C:\simind\mew15\projections\cali_sp\mew15_low_cali_sp.h00"
-# upper_dir = r"C:\simind\mew15\projections\cali_sp\mew15_up_cali_sp.b01"
-# upper_hdr = r"C:\simind\mew15\projections\cali_sp\mew15_up_cali_sp.h00"
+photopeak_dir = r"C:\simind\mew15\projections\cali_sp\mew15_main_cali_sp.b01"
+photopeak_hdr = r"C:\simind\mew15\projections\cali_sp\mew15_main_cali_sp.h00"
+lower_dir = r"C:\simind\mew15\projections\cali_sp\mew15_low_cali_sp.b01"
+lower_hdr = r"C:\simind\mew15\projections\cali_sp\mew15_low_cali_sp.h00"
+upper_dir = r"C:\simind\mew15\projections\cali_sp\mew15_up_cali_sp.b01"
+upper_hdr = r"C:\simind\mew15\projections\cali_sp\mew15_up_cali_sp.h00"
 
-# photopeak_dir = r"C:\simind\mew15\projections\cali_sp\mew15_main_cali_sp.b02"
-# photopeak_hdr = r"C:\simind\mew15\projections\cali_sp\mew15_main_cali_sp.h00"
-# lower_dir = r"C:\simind\mew15\projections\cali_sp\mew15_low_cali_sp.b02"
-# lower_hdr = r"C:\simind\mew15\projections\cali_sp\mew15_low_cali_sp.h00"
-# upper_dir = r"C:\simind\mew15\projections\cali_sp\mew15_up_cali_sp.b02"
-# upper_hdr = r"C:\simind\mew15\projections\cali_sp\mew15_up_cali_sp.h00"
-
-"""mew15_5"""
-# photopeak_dir = r"C:\simind\mew15_5\calib\spect\mew15_5_main_cali_sp.b01"
-# photopeak_hdr = r"C:\simind\mew15_5\calib\spect\mew15_5_main_cali_sp.h00"
-# lower_dir = r"C:\simind\mew15_5\calib\spect\mew15_5_low_cali_sp.b01"
-# lower_hdr = r"C:\simind\mew15_5\calib\spect\mew15_5_low_cali_sp.h00"
-# upper_dir = r"C:\simind\mew15_5\calib\spect\mew15_5_up_cali_sp.b01"
-# upper_hdr = r"C:\simind\mew15_5\calib\spect\mew15_5_up_cali_sp.h00"
-
-photopeak_dir = r"C:\Users\hhond\source\repos\simind\simind_study\mew15\projections\cali_sp\mew15_main_cali_sp.b01"
-photopeak_hdr = r"C:\Users\hhond\source\repos\simind\simind_study\mew15\projections\cali_sp\mew15_main_cali_sp.h00"
-lower_dir = r"C:\Users\hhond\source\repos\simind\simind_study\mew15\projections\cali_sp\mew15_low_cali_sp.b01"
-lower_hdr = r"C:\Users\hhond\source\repos\simind\simind_study\mew15\projections\cali_sp\mew15_low_cali_sp.h00"
-upper_dir = r"C:\Users\hhond\source\repos\simind\simind_study\mew15\projections\cali_sp\mew15_up_cali_sp.b01"
-upper_hdr = r"C:\Users\hhond\source\repos\simind\simind_study\mew15\projections\cali_sp\mew15_up_cali_sp.h00"
 
 
 
@@ -70,11 +49,11 @@ projections = simind.get_projections(photopeak_hdr)
 # s_TEW = compute_EW_scatter(lower_projections, upper_projections, ww_lower, ww_upper, ww_peak)
 
 
-# s_TEW = simind.get_scatter_from_TEW(
-#     headerfile_lower=lower_hdr,
-#     headerfile_peak=photopeak_hdr,
-#     headerfile_upper=upper_hdr
-# )
+s_TEW = simind.get_scatter_from_TEW(
+    headerfile_lower=lower_hdr,
+    headerfile_peak=photopeak_hdr,
+    headerfile_upper=upper_hdr
+)
 
 projections_noise = torch.poisson(projections * activity * dT)
 # s_TEW = torch.poisson(s_TEW * activity * dT)
@@ -89,22 +68,22 @@ psf_transform = SPECTPSFTransform(psf_meta)
 object_meta, proj_meta = simind.get_metadata(photopeak_hdr)
 
 system_matrix = SPECTSystemMatrix(
-    obj2obj_transforms=[psf_transform,],
+    obj2obj_transforms=[],
     proj2proj_transforms=[],
     object_meta=object_meta,
     proj_meta=proj_meta
 )
 
 # likelihood = PoissonLogLikelihood(system_matrix, projections_noise)
-# likelihood = PoissonLogLikelihood(
-#     system_matrix=system_matrix, 
-#     projections=projections_noise, 
-#     additive_term=s_TEW
-#     )
 likelihood = PoissonLogLikelihood(
     system_matrix=system_matrix, 
-    projections=projections_noise
+    projections=projections_noise, 
+    additive_term=s_TEW
     )
+# likelihood = PoissonLogLikelihood(
+#     system_matrix=system_matrix, 
+#     projections=projections_noise
+#     )
 
 
 
@@ -113,7 +92,7 @@ osem = OSEM(likelihood)
 #             system_matrix=system_matrix,
 #             scatter=s_TEW)
 
-calibration_factor = osem(n_iters=10, n_subsets=4)
+calibration_factor = osem(n_iters=10, n_subsets=8)
 
 calibration_factor = calibration_factor[0].cpu().numpy()
 # calibration_factor[calibration_factor < 0] = 0
@@ -131,7 +110,7 @@ calibration_factor = calibration_factor[0].cpu().numpy()
 
 # reshaped_prediction = calibration_factor.transpose((2, 1, 0))
 
-with open('point_penetrate.bin', 'wb') as f:
+with open('point_tew.bin', 'wb') as f:
     f.write(calibration_factor.tobytes())
 
 # # ボクセルサイズを取得
