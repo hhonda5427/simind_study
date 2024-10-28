@@ -20,7 +20,7 @@ import sim_method as sim
 
 
 """mew15_15"""
-photopeak_dir = r"C:\simind\mew15\projections\cali_sp\mew15_main_cali_sp.b01"
+photopeak_dir = r"C:\simind\mew15\projections\cali_sp\mew15_main_cali_sp.b02"
 photopeak_hdr = r"C:\simind\mew15\projections\cali_sp\mew15_main_cali_sp.h00"
 lower_dir = r"C:\simind\mew15\projections\cali_sp\mew15_low_cali_sp.b01"
 lower_hdr = r"C:\simind\mew15\projections\cali_sp\mew15_low_cali_sp.h00"
@@ -75,15 +75,15 @@ system_matrix = SPECTSystemMatrix(
 )
 
 # likelihood = PoissonLogLikelihood(system_matrix, projections_noise)
-likelihood = PoissonLogLikelihood(
-    system_matrix=system_matrix, 
-    projections=projections_noise, 
-    additive_term=s_TEW
-    )
 # likelihood = PoissonLogLikelihood(
 #     system_matrix=system_matrix, 
-#     projections=projections_noise
+#     projections=projections_noise, 
+#     additive_term=s_TEW
 #     )
+likelihood = PoissonLogLikelihood(
+    system_matrix=system_matrix, 
+    projections=projections_noise
+    )
 
 
 
@@ -110,7 +110,7 @@ calibration_factor = calibration_factor[0].cpu().numpy()
 
 # reshaped_prediction = calibration_factor.transpose((2, 1, 0))
 
-with open('point_tew.bin', 'wb') as f:
+with open('point_prim.bin', 'wb') as f:
     f.write(calibration_factor.tobytes())
 
 # # ボクセルサイズを取得
